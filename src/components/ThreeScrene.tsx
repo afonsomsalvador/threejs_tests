@@ -21,7 +21,7 @@ export default function ThreeScene() {
     const mount = mountRef.current!;
     mount.appendChild(renderer.domElement);
 
-      const faceMaterials = [
+    const faceMaterials = [
       new THREE.MeshBasicMaterial({ color: 0xff0000 }), // frente
       new THREE.MeshBasicMaterial({ color: 0x00ff00 }), // trás
       new THREE.MeshBasicMaterial({ color: 0x0000ff }), // topo
@@ -29,21 +29,50 @@ export default function ThreeScene() {
       new THREE.MeshBasicMaterial({ color: 0xff00ff }), // direita
       new THREE.MeshBasicMaterial({ color: 0x00ffff }), // esquerda
     ];
-    
-    // Exemplo: adiciona um cubo
+
+    // geometrias
+
     const geometry = new THREE.BoxGeometry();
-    // const material = new THREE.MeshBasicMaterial();
-    const cube = new THREE.Mesh(geometry, faceMaterials);
+
+    const sphere = new THREE.SphereGeometry(0.2, 3, 3);
+
+    const plane = new THREE.PlaneGeometry(0.5, 0.5);
+
+
+    // materiais
+    const lamber = new THREE.MeshLambertMaterial(); // Material que reflete a luz~
+
+    const material = new THREE.MeshNormalMaterial(); // Material que muda de cor automaticamente
+
+    const material2 = new THREE.ShaderMaterial({
+      uniforms: {
+        time: { value: 1.0 },
+        resolution: {
+          value: new THREE.Vector2(),
+        },
+      },
+      vertexShader: `
+        void main() {
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+        `,
+      fragmentShader: `
+      void main() {
+          gl_FragColor = vec4(1.0, 0., 0., 1.);
+      }`,
+    });
+
+    const cube = new THREE.Mesh(geometry, material); // Cria o cubo com a geometria e material
     scene.add(cube);
-    
+
     const controls = new OrbitControls(camera, renderer.domElement); //Faz o controle da câmera
 
-    camera.position.z = 5;
+    camera.position.z = 2; //Posiciona a longitude da câmera
 
     const animate = () => {
       requestAnimationFrame(animate);
-      cube.rotation.x += 0.01;
-      cube.rotation.y += 0.01;
+      cube.rotation.x += 0.01; //Faz o cubo girar
+      cube.rotation.y += 0.01; //Faz o cubo girar
       renderer.render(scene, camera);
     };
 

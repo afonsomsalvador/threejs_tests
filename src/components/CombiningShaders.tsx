@@ -17,7 +17,7 @@ export default function combiningShaders() {
       0.1,
       1000
     );
-    const renderer = new THREE.WebGLRenderer();
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); // Ativa o antialiasing e o alpha para fundo transparente
     renderer.setSize(window.innerWidth, window.innerHeight);
 
     const mount = mountRef.current!;
@@ -207,7 +207,7 @@ float snoise(vec4 v){
       material2.uniforms.time.value += 0.01; // Atualiza o valor de time, o que faz o efeito do objeto mover
       renderer.render(scene, camera);
     };
-    
+
     const handleResize = () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();

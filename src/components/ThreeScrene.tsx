@@ -10,12 +10,12 @@ export default function ThreeScene() {
   useEffect(() => {
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
-      75,
+      70,
       window.innerWidth / window.innerHeight,
       0.1,
       1000
     );
-    const renderer = new THREE.WebGLRenderer();
+    const renderer = new THREE.WebGLRenderer({antialias: true, alpha: true}); // Ativa o antialiasing e o alpha para fundo transparente
     renderer.setSize(window.innerWidth, window.innerHeight);
 
     const mount = mountRef.current!;

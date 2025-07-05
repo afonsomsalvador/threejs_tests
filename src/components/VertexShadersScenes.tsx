@@ -18,7 +18,7 @@ export default function vertexShadersScenes() {
       0.1,
       1000
     );
-    const renderer = new THREE.WebGLRenderer();
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); // Ativa o antialiasing e o alpha para fundo transparente
     renderer.setSize(window.innerWidth, window.innerHeight);
 
     const mount = mountRef.current!;
@@ -47,7 +47,7 @@ export default function vertexShadersScenes() {
     const material = new THREE.MeshNormalMaterial(); // Material que muda de cor automaticamente
 
     const material2 = new THREE.ShaderMaterial({
-     // wireframe: true, // Ativa o modo wireframe
+      // wireframe: true, // Ativa o modo wireframe
       uniforms: {
         time: { value: 1.0 },
         uTexture: { value: new THREE.TextureLoader().load(testTexture2.src) }, // Carrega uma textura, se tirar aperece só a cor

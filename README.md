@@ -1,14 +1,14 @@
-# 🌐 Three.js WebGL + Barba.js Testes
+# 🌐 Three.js WebGL + Barba.js Demo
 
-Este é um projeto experimental desenvolvido com **Next.js**, **Three.js**, **WebGL** e **Barba.js**, focado em criar experiências visuais interativas com transições suaves entre páginas e cenas 3D personalizadas.
+This is an experimental project built with **Next.js**, **Three.js**, **WebGL**, and **Barba.js**, focused on creating interactive visual experiences with smooth transitions between pages and custom 3D scenes.
 
-🚀 **Demo ao vivo:**  
+🚀 **Live Demo:**  
 👉 [threejs-tests-eight.vercel.app](https://threejs-tests-eight.vercel.app/)
 
-## 📦 Tecnologias Usadas
+## 📦 Technologies Used
 
-- [Next.js](https://nextjs.org/) – Framework React para apps rápidos e modernos.
-- [Three.js](https://threejs.org/) – Biblioteca 3D baseada em WebGL.
-- [WebGL](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API) – API gráfica para renderização 2D/3D no browser.
-- [Barba.js](https://barba.js.org/) – Biblioteca para transições fluidas entre páginas.
-- [GLSL](https://thebookofshaders.com/) – Linguagem de shaders usada nos materiais customizados.
+- [Next.js](https://nextjs.org/) – React framework for fast and modern web apps.
+- [Three.js](https://threejs.org/) – 3D library built on top of WebGL.
+- [WebGL](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API) – Graphics API for rendering 2D and 3D in the browser.
+- [Barba.js](https://barba.js.org/) – Library for fluid page transitions.
+- [GLSL](https://thebookofshaders.com/) – Shader language used for custom materials.

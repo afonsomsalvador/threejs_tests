@@ -32,7 +32,7 @@ export default function ThreeScene() {
 
     // geometrias
 
-    const geometry = new THREE.BoxGeometry();
+    const geometry = new THREE.BoxGeometry(); // Cria a geometria do cubo
 
     const sphere = new THREE.SphereGeometry(0.2, 3, 3);
 
@@ -44,30 +44,14 @@ export default function ThreeScene() {
 
     const material = new THREE.MeshNormalMaterial(); // Material que muda de cor automaticamente
 
-    const material2 = new THREE.ShaderMaterial({
-      uniforms: {
-        time: { value: 1.0 },
-        resolution: {
-          value: new THREE.Vector2(),
-        },
-      },
-      vertexShader: `
-        void main() {
-            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-        }
-        `,
-      fragmentShader: `
-      void main() {
-          gl_FragColor = vec4(1.0, 0., 0., 1.);
-      }`,
-    });
-
     const cube = new THREE.Mesh(geometry, material); // Cria o cubo com a geometria e material
     scene.add(cube);
 
     const controls = new OrbitControls(camera, renderer.domElement); //Faz o controle da câmera
 
     camera.position.z = 2; //Posiciona a longitude da câmera
+
+    // camera.fov = Math.atan((window.innerHeight / 2) / camera.position.z) * (180 / Math.PI) * 2; // Ajusta o FOV da câmera para manter a proporção correta
 
     const animate = () => {
       requestAnimationFrame(animate);

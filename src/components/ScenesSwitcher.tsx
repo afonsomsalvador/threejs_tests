@@ -12,7 +12,7 @@ const scenes = [
 ];
 
 export default function ScenesSwitcher() {
-  const [activeSceneIndex, setActiveSceneIndex] = useState(2);
+  const [activeSceneIndex, setActiveSceneIndex] = useState(1);
 
   return (
     <>

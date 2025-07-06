@@ -21,6 +21,8 @@ export default function vertexShadersScenes() {
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); // Ativa o antialiasing e o alpha para fundo transparente
     renderer.setSize(window.innerWidth, window.innerHeight);
 
+    let gui: any;
+
     const mount = mountRef.current!;
     mount.appendChild(renderer.domElement);
 
@@ -50,6 +52,7 @@ export default function vertexShadersScenes() {
       // wireframe: true, // Ativa o modo wireframe
       uniforms: {
         time: { value: 1.0 },
+        uProgress: { value: 1.0 }, // Uniforme para controlar o progresso
         uTexture: { value: new THREE.TextureLoader().load(testTexture2.src) }, // Carrega uma textura, se tirar aperece só a cor
         resolution: {
           value: new THREE.Vector2(),
@@ -73,6 +76,7 @@ export default function vertexShadersScenes() {
       fragmentShader: `
       uniform float time;
       uniform sampler2D uTexture;
+      uniform float uProgress; // Uniforme para controlar o progresso
 
       varying float pulse;
       varying vec2 vUv;
@@ -90,6 +94,8 @@ export default function vertexShadersScenes() {
           // gl_FragColor = vec4(1., 1., 0., 1.); Define a cor do fragmento
 
           gl_FragColor = myimage;
+
+          gl_FragColor = vec4(uProgress, 0., 0., 1.);
       }`,
     });
 
@@ -104,19 +110,32 @@ export default function vertexShadersScenes() {
 
     camera.position.z = 1; //Posiciona a longitude da câmera
 
+    const settingsObj = {
+      progress: 0,
+    };
+
+    const settings = async () => {
+      const dat = await import("dat.gui"); // o dat.gui é para ter uns settings no canto superior direito para influenciar diretamente no obj
+      gui = new dat.GUI();
+      gui.add(settingsObj, "progress", 0, 1, 0.001);
+    };
+
     const animate = () => {
       requestAnimationFrame(animate);
       // cube.rotation.x += 0.01; //Faz o cubo girar
       // cube.rotation.y += 0.01; //Faz o cubo girar
       material2.uniforms.time.value += 0.01; // Atualiza o valor de time, o que faz o efeito do objeto mover
+      material2.uniforms.uProgress.value = settingsObj.progress; // Atualiza o valor de uProgress
       renderer.render(scene, camera);
     };
 
     animate();
+    settings();
 
     // Limpeza ao desmontar
     return () => {
       mount.removeChild(renderer.domElement);
+      if (gui) gui.destroy();
     };
   }, []);
 
